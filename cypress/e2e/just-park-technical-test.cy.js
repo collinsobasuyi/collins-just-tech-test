@@ -4,16 +4,16 @@ import { format, addDays } from 'date-fns'
 
 const { onLoginPage } = require("../support/page_objects/loginPage.cy")
 
-describe('Test with page object', () => {
+describe('E2E Test Automation', () => {
 
-    beforeEach(function () {
+    before(function () {
         cy.visit('/')
         cy.fixture('test-data').then((data) => {
             this.data = data
         })
     })
 
-    it('Sign into user account', function () {
+    it('Test suites', function () {
         onLoginPage.getCookieBanner().click()
         onLoginPage.getloginDashbordLink().click()
         onLoginPage.getSignInWithEmailLink().click()
@@ -34,16 +34,7 @@ describe('Test with page object', () => {
         onLoginPage.getCheckoutConfirmButton().click()
         onLoginPage.getInfoValidationBox().should('include.text', this.data.validationMessage)
 
-    })
-
-    it.only('ffff into user account', function () {
-        onLoginPage.getCookieBanner().click()
-        onLoginPage.getloginDashbordLink().click()
-        onLoginPage.getSignInWithEmailLink().click()
-        onLoginPage.getLoginEmail().type(this.data.loginEmail)
-        onLoginPage.getLoginPassword().type(this.data.loginPassword, { log: false })
-        onLoginPage.getSignInButton().click({ delay: 300 })
-        cy.contains('Dashboard').should('be.visible')
+   
         onLoginPage.getFindParking().click()
         onLoginPage.getSearchBox().type("1001", { delay: 100 })
         onLoginPage.getResultItems().eq(0).click()
@@ -76,6 +67,5 @@ describe('Test with page object', () => {
           onLoginPage.getLogOut().click()
         
     })
-    
     
 })
